@@ -1,10 +1,12 @@
-// apps/tobest/lib/features/home/presentation/widgets/daily_summary_card.dart
+// apps/tobest/lib/features/home/presentation/widgets/home_widgets.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:tobest/features/health/presentation/providers/health_provider.dart';
 import 'package:tobest/features/nutrition/presentation/providers/nutrition_provider.dart';
+import 'package:tobest/router.dart';
 
 /// بطاقة ملخص اليوم: سعرات، بروتين، خطوات، نوم
 class DailySummaryCard extends ConsumerWidget {
@@ -125,15 +127,6 @@ class _MetricTile extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-
-// apps/tobest/lib/features/home/presentation/widgets/quick_actions_row.dart
-
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shared/design/tokens.dart';
-import 'package:tobest/router.dart';
-
 /// صف الإجراءات السريعة في الرئيسية
 class QuickActionsRow extends StatelessWidget {
   const QuickActionsRow({super.key});
@@ -213,13 +206,6 @@ class _QuickAction extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-
-// apps/tobest/lib/features/home/presentation/widgets/streak_heatmap.dart
-
-import 'package:flutter/material.dart';
-import 'package:shared/design/tokens.dart';
-
 /// Heatmap الانتظام — 4 أسابيع × 7 أيام
 class StreakHeatmap extends StatelessWidget {
   const StreakHeatmap({super.key});
@@ -263,15 +249,6 @@ class _HeatCell extends StatelessWidget {
     );
   }
 }
-
-// ─────────────────────────────────────────────────────────────
-
-// apps/tobest/lib/features/home/presentation/widgets/today_workout_card.dart
-
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shared/design/tokens.dart';
-import 'package:tobest/router.dart';
 
 /// بطاقة تمرين اليوم في الرئيسية
 class TodayWorkoutCard extends StatelessWidget {

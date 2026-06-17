@@ -1,9 +1,16 @@
-// apps/tobest/lib/features/progress/presentation/widgets/steps_chart.dart
+// apps/tobest/lib/features/progress/presentation/widgets/progress_widgets.dart
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:shared/domain/entities/health_entity.dart';
-import 'package:intl/intl.dart';
+import 'package:shared/domain/entities/workout_entity.dart';
+import 'package:shared/infrastructure/gas_client.dart';
+import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
+
+part 'progress_widgets.g.dart';
 
 /// مخطط الخطوات الأسبوعي
 class StepsChart extends StatelessWidget {
@@ -78,14 +85,6 @@ class StepsChart extends StatelessWidget {
       n >= 1000 ? '${(n / 1000).toStringAsFixed(1)}k' : '$n';
 }
 
-// ─────────────────────────────────────────────────────────────
-
-// apps/tobest/lib/features/progress/presentation/widgets/body_chart.dart
-
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared/design/tokens.dart';
-
 /// مخطط تغير الوزن وقياسات الجسم
 class BodyChart extends ConsumerWidget {
   const BodyChart({super.key});
@@ -129,19 +128,6 @@ class BodyChart extends ConsumerWidget {
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-
-// apps/tobest/lib/features/progress/presentation/widgets/pr_list.dart
-
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shared/design/tokens.dart';
-import 'package:shared/domain/entities/workout_entity.dart';
-import 'package:shared/infrastructure/gas_client.dart';
-import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
-
-part 'pr_list.g.dart';
 
 @riverpod
 Future<List<PRRecord>> topPRs(Ref ref) async {
