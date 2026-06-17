@@ -14,10 +14,9 @@ import 'package:shared/config/app_config.dart';
 part 'background_service.g.dart';
 
 // ── أسماء Tasks ──────────────────────────────────────────────
-const _kChatFetchTask    = 'com.tobest.chatFetch';
-const _kHealthSyncTask   = 'com.tobest.healthSync';
-const _kWeeklyCleanup    = 'com.tobest.weeklyCleanup';
-const _kConnectivityTask = 'com.tobest.connectivity';
+const _kChatFetchTask  = 'com.tobest.chatFetch';
+const _kHealthSyncTask = 'com.tobest.healthSync';
+const _kWeeklyCleanup  = 'com.tobest.weeklyCleanup';
 
 /// Dispatcher لـ Background Tasks
 ///
@@ -77,7 +76,6 @@ class BackgroundService {
   static Future<void> initialize() async {
     await Workmanager().initialize(
       callbackDispatcher,
-      isInDebugMode: false,
     );
     developer.log('BackgroundService initialized', name: 'BackgroundService');
   }
