@@ -10,6 +10,7 @@ import 'package:shared/config/app_config.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:shared/domain/entities/chat_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
+import 'package:shared/data/models/chat_model.dart';
 import 'package:shared/infrastructure/isar_service.dart';
 import 'package:shared/infrastructure/polling_service.dart';
 import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';

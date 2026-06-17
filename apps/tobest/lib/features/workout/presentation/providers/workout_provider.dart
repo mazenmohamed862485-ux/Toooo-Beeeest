@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/domain/entities/workout_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
+import 'package:shared/data/models/workout_model.dart';
 import 'package:shared/infrastructure/isar_service.dart';
 import 'package:shared/utils/evaluator.dart';
 import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
@@ -89,12 +90,12 @@ EvalResult? liveEvaluation(
       if (lastBest == null) return EvalResult.all['beg']!;
 
       return Evaluator.evaluate(
-        prev: _PerformancePoint(
+        prev: PerformancePoint(
           weight: lastBest.weight,
           reps:   lastBest.reps,
           date:   lastEntry.date,
         ),
-        curr: _PerformancePoint(
+        curr: PerformancePoint(
           weight: currentWeight,
           reps:   currentReps,
           date:   now,
@@ -258,8 +259,8 @@ class ActiveSessionState {
       );
 }
 
-class _PerformancePoint {
-  const _PerformancePoint({required this.weight, required this.reps, this.date});
+class PerformancePoint {
+  const PerformancePoint({required this.weight, required this.reps, this.date});
   final double weight;
   final int reps;
   final DateTime? date;

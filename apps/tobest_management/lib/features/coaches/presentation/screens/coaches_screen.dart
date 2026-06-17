@@ -1,6 +1,7 @@
 // apps/tobest_management/lib/features/coaches/presentation/screens/coaches_screen.dart
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/config/app_config.dart';

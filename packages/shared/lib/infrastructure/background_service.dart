@@ -90,7 +90,7 @@ class BackgroundService {
       frequency:       AppConfig.backgroundFetchInterval,
       constraints:     Constraints(networkType: NetworkType.connected),
       inputData:       {'userId': userId},
-      existingWorkPolicy: ExistingWorkPolicy.keep,
+      existingWorkPolicy: ExistingPeriodicWorkPolicy.keep,
     );
   }
 
@@ -102,7 +102,7 @@ class BackgroundService {
       frequency:       const Duration(hours: 1),
       constraints:     Constraints(networkType: NetworkType.connected),
       inputData:       {'userId': userId},
-      existingWorkPolicy: ExistingWorkPolicy.keep,
+      existingWorkPolicy: ExistingPeriodicWorkPolicy.keep,
     );
   }
 
@@ -114,7 +114,7 @@ class BackgroundService {
       frequency:       const Duration(days: 7),
       constraints:     Constraints(networkType: NetworkType.connected),
       inputData:       {'userId': userId},
-      existingWorkPolicy: ExistingWorkPolicy.replace,
+      existingWorkPolicy: ExistingPeriodicWorkPolicy.replace,
     );
   }
 

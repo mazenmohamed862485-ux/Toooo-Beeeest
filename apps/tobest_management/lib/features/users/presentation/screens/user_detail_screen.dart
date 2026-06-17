@@ -1,6 +1,7 @@
 // apps/tobest_management/lib/features/users/presentation/screens/user_detail_screen.dart
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/design/tokens.dart';
@@ -8,7 +9,7 @@ import 'package:shared/domain/entities/user_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
 import 'package:tobest_management/features/auth/presentation/providers/mgmt_auth_provider.dart';
 import 'package:tobest_management/features/users/presentation/screens/users_screen.dart'
-    show _parseUser;
+    show parseUser;
 
 part 'user_detail_screen.g.dart';
 
@@ -16,7 +17,7 @@ part 'user_detail_screen.g.dart';
 Future<UserEntity> userDetail(Ref ref, String userId) async {
   final gas  = await ref.read(gasClientProvider.future);
   final resp = await gas.get<Map<String, dynamic>>('/admin/users/$userId');
-  return _parseUser(resp.data?['user'] as Map<String, dynamic>? ?? {});
+  return parseUser(resp.data?['user'] as Map<String, dynamic>? ?? {});
 }
 
 /// شاشة تفاصيل المستخدم

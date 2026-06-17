@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/design/tokens.dart';
+import 'package:shared/config/app_config.dart';
 import 'package:shared/domain/entities/user_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
 
@@ -22,10 +23,10 @@ Future<List<UserEntity>> allUsers(Ref ref, {String? search, String? roleFilter})
     },
   );
   final list = resp.data?['users'] as List<dynamic>? ?? [];
-  return list.map((u) => _parseUser(u as Map<String, dynamic>)).toList();
+  return list.map((u) => parseUser(u as Map<String, dynamic>)).toList();
 }
 
-UserEntity _parseUser(Map<String, dynamic> data) => UserEntity(
+UserEntity parseUser(Map<String, dynamic> data) => UserEntity(
   id:                 data['id'] as String? ?? '',
   email:              data['email'] as String? ?? '',
   role:               data['role'] as String? ?? AppRole.user,
@@ -57,8 +58,9 @@ class UsersScreen extends HookConsumerWidget {
     final isRtl       = Directionality.of(context) == TextDirection.rtl;
 
     useEffect(() {
-      searchCtrl.addListener(() => search.value = searchCtrl.text);
-      return searchCtrl.removeListener;
+      void listener() { search.value = searchCtrl.text; }
+      searchCtrl.addListener(listener);
+      return () => searchCtrl.removeListener(listener);
     }, const []);
 
     final usersAsync = ref.watch(

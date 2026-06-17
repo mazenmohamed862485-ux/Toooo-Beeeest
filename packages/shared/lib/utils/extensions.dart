@@ -1,7 +1,7 @@
 // packages/shared/lib/utils/extensions.dart
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 
 /// Extensions على DateTime
 extension DateTimeExt on DateTime {

@@ -8,7 +8,7 @@ import 'package:shared/design/tokens.dart';
 import 'package:shared/domain/entities/chat_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
 import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 
 part 'conversations_screen.g.dart';
 

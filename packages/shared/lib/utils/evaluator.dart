@@ -163,8 +163,8 @@ class Evaluator {
   ///
   /// ترجمة حرفية بالكامل من دالة evaluate() في evaluator.js
   static EvalResult evaluate({
-    _PerformancePoint? prev,
-    required _PerformancePoint curr,
+    PerformancePoint? prev,
+    required PerformancePoint curr,
     List<WorkoutLogEntry> history = const [],
   }) {
     // بداية — لا يوجد سجل سابق
@@ -190,7 +190,7 @@ class Evaluator {
     // الوزن نفسه، التكرارات أكثر
     if (wD == 0 && rD > 0) {
       final weeks = prev.date != null
-          ? weeksBetween(prev.date!, curr.date)
+          ? weeksBetween(prev.date!, curr.date ?? DateTime.now())
           : 99.0;
 
       if (rD >= 2) {
@@ -573,8 +573,8 @@ class Evaluator {
 
 // ── هياكل بيانات داخلية ─────────────────────────────────────
 
-class _PerformancePoint {
-  const _PerformancePoint({
+class PerformancePoint {
+  const PerformancePoint({
     required this.weight,
     required this.reps,
     this.date,
@@ -619,10 +619,10 @@ class _ScoredFood {
 
 /// نقطة أداء — للاستخدام في استدعاءات Evaluator.evaluate()
 extension EvaluatorHelper on Evaluator {
-  static _PerformancePoint point({
+  static PerformancePoint point({
     required double weight,
     required int reps,
     DateTime? date,
   }) =>
-      _PerformancePoint(weight: weight, reps: reps, date: date);
+      PerformancePoint(weight: weight, reps: reps, date: date);
 }

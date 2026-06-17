@@ -7,6 +7,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:shared/domain/entities/nutrition_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
+import 'package:shared/data/models/food_model.dart';
+import 'package:shared/data/models/meal_model.dart';
 import 'package:shared/infrastructure/isar_service.dart';
 import 'package:shared/utils/evaluator.dart';
 import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
@@ -15,7 +17,6 @@ import 'package:tobest/features/nutrition/presentation/widgets/macro_ring.dart';
 import 'package:tobest/features/nutrition/presentation/widgets/meal_card.dart';
 import 'package:tobest/features/nutrition/presentation/widgets/food_search_delegate.dart';
 
-part 'nutrition_screen.g.dart';
 
 /// شاشة التغذية
 ///
