@@ -2,7 +2,6 @@
 #
 # CD لتطبيق TO Best Management — APK داخلي للفريق
 # يُشغَّل عند push tag من نوع v*.*.*-management
-# أو يدوياً عبر workflow_dispatch
 
 name: CD — Management APK
 
@@ -20,7 +19,7 @@ on:
         options:     [production, staging]
 
 env:
-  FLUTTER_VERSION: '3.44.0'
+  FLUTTER_VERSION: '3.24.5'
   APP_DIR:         apps/tobest_management
 
 jobs:
@@ -47,7 +46,7 @@ jobs:
           cache:           true
 
       - name: Install Melos
-        run: dart pub global activate melos
+        run: dart pub global activate melos 6.3.0
 
       - name: Bootstrap Monorepo
         run: melos bootstrap
@@ -118,7 +117,7 @@ SECRETS_EOF
           files:              management-*.apk
           generate_release_notes: true
           draft:              false
-          prerelease:         true    # المعالجة داخلية — prerelease دائماً
+          prerelease:         true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

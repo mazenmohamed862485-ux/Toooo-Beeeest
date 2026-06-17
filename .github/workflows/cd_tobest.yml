@@ -19,7 +19,7 @@ on:
         options:     [release, debug]
 
 env:
-  FLUTTER_VERSION: '3.44.0'
+  FLUTTER_VERSION: '3.24.5'
   APP_DIR:         apps/tobest
 
 jobs:
@@ -49,7 +49,7 @@ jobs:
 
       # ── Melos Bootstrap ───────────────────────────────
       - name: Install Melos
-        run: dart pub global activate melos
+        run: dart pub global activate melos 6.3.0
 
       - name: Bootstrap Monorepo
         run: melos bootstrap

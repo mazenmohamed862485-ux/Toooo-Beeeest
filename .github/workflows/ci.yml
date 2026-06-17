@@ -29,15 +29,27 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.44.0'
+          flutter-version: '3.24.5'
           channel:         stable
           cache:           true
 
       - name: Install Melos
-        run: dart pub global activate melos
+        run: dart pub global activate melos 6.3.0
 
       - name: Bootstrap Packages
         run: melos bootstrap
+
+      - name: Create Secrets File (placeholder for analyze)
+        run: |
+          cat > packages/shared/lib/config/secrets.dart << 'SECRETS_EOF'
+// CI placeholder — real values injected in CD
+class AppSecrets {
+  AppSecrets._();
+  static const String gasBaseUrl   = 'https://placeholder.example.com';
+  static const String gasSecretKey = 'placeholder';
+  static const String geminiApiKey = 'placeholder';
+}
+SECRETS_EOF
 
       - name: Generate Code (build_runner)
         run: melos run generate
@@ -59,15 +71,27 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.44.0'
+          flutter-version: '3.24.5'
           channel:         stable
           cache:           true
 
       - name: Install Melos
-        run: dart pub global activate melos
+        run: dart pub global activate melos 6.3.0
 
       - name: Bootstrap
         run: melos bootstrap
+
+      - name: Create Secrets File (placeholder for tests)
+        run: |
+          cat > packages/shared/lib/config/secrets.dart << 'SECRETS_EOF'
+// CI placeholder — real values injected in CD
+class AppSecrets {
+  AppSecrets._();
+  static const String gasBaseUrl   = 'https://placeholder.example.com';
+  static const String gasSecretKey = 'placeholder';
+  static const String geminiApiKey = 'placeholder';
+}
+SECRETS_EOF
 
       - name: Generate Code
         run: melos run generate

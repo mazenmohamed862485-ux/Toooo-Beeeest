@@ -1,0 +1,7 @@
+name: tobest_monorepo
+description: TO Best Flutter Monorepo — workspace root (required by melos)
+
+publish_to: none
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
