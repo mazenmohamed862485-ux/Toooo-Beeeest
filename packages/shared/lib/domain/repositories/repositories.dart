@@ -1,6 +1,16 @@
-// packages/shared/lib/domain/repositories/chat_repository.dart
+// packages/shared/lib/domain/repositories/repositories.dart
+// Barrel: all domain repository interfaces in one file.
+// All imports at top (Dart requires directives before any declarations).
 
 import 'package:shared/domain/entities/chat_entity.dart';
+import 'package:shared/domain/entities/health_entity.dart';
+import 'package:shared/domain/entities/nutrition_entity.dart';
+import 'package:shared/domain/entities/subscription_entity.dart';
+import 'package:shared/domain/entities/video_entity.dart';
+
+// ─────────────────────────────────────────────────────────────
+// ChatRepository
+// ─────────────────────────────────────────────────────────────
 
 abstract class ChatRepository {
   /// جلب رسائل محادثة
@@ -84,10 +94,8 @@ abstract class ChatRepository {
 }
 
 // ─────────────────────────────────────────────────────────────
-
-// packages/shared/lib/domain/repositories/nutrition_repository.dart
-
-import 'package:shared/domain/entities/nutrition_entity.dart';
+// NutritionRepository
+// ─────────────────────────────────────────────────────────────
 
 abstract class NutritionRepository {
   /// جلب وجبات اليوم
@@ -116,10 +124,8 @@ abstract class NutritionRepository {
 }
 
 // ─────────────────────────────────────────────────────────────
-
-// packages/shared/lib/domain/repositories/health_repository.dart
-
-import 'package:shared/domain/entities/health_entity.dart';
+// HealthRepository
+// ─────────────────────────────────────────────────────────────
 
 abstract class HealthRepository {
   /// حفظ بيانات الخطوات اليومية
@@ -159,10 +165,8 @@ abstract class HealthRepository {
 }
 
 // ─────────────────────────────────────────────────────────────
-
-// packages/shared/lib/domain/repositories/subscription_repository.dart
-
-import 'package:shared/domain/entities/subscription_entity.dart';
+// SubscriptionRepository
+// ─────────────────────────────────────────────────────────────
 
 abstract class SubscriptionRepository {
   /// جلب الخطط المتاحة
@@ -218,10 +222,8 @@ abstract class SubscriptionRepository {
 }
 
 // ─────────────────────────────────────────────────────────────
-
-// packages/shared/lib/domain/repositories/video_repository.dart
-
-import 'package:shared/domain/entities/video_entity.dart';
+// VideoRepository
+// ─────────────────────────────────────────────────────────────
 
 abstract class VideoRepository {
   /// جلب metadata الفيديوهات لتمرين
