@@ -134,18 +134,23 @@ jobs:
 
           (cd apps/tobest && dart run build_runner build --delete-conflicting-outputs)
 
-      - name: Fix isar_flutter_libs Namespace (AGP 8.x compat)
+      - name: Fix isar_flutter_libs build.gradle (AGP 8.x + compileSdk compat)
         run: |
           ISAR_BUILD_GRADLE="$HOME/.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/android/build.gradle"
           if [ -f "$ISAR_BUILD_GRADLE" ]; then
+            echo "--- isar_flutter_libs/android/build.gradle (before patch) ---"
+            cat "$ISAR_BUILD_GRADLE"
+            # 1. Add namespace if missing
             if ! grep -q "namespace" "$ISAR_BUILD_GRADLE"; then
               sed -i "s/android {/android {\n    namespace 'dev.isar.isar_flutter_libs'/" "$ISAR_BUILD_GRADLE"
-              echo "Patched isar_flutter_libs namespace"
-            else
-              echo "namespace already present"
             fi
+            # 2. Upgrade compileSdkVersion to 35 to resolve lStar attribute
+            sed -i 's/compileSdkVersion [0-9]*/compileSdkVersion 35/' "$ISAR_BUILD_GRADLE"
+            sed -i 's/compileSdk [0-9]*/compileSdk 35/' "$ISAR_BUILD_GRADLE"
+            echo "--- isar_flutter_libs/android/build.gradle (after patch) ---"
+            cat "$ISAR_BUILD_GRADLE"
           else
-            echo "isar_flutter_libs build.gradle not found at expected path"
+            echo "isar_flutter_libs build.gradle not found - searching..."
             find ~/.pub-cache -name "build.gradle" -path "*isar_flutter_libs*" 2>/dev/null | head -5
           fi
 
