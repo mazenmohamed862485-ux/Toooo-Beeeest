@@ -45,7 +45,7 @@ class FoodSearchDelegate extends SearchDelegate<FoodItem?> {
         child: Text(
           isRtl ? 'اكتب كلمتين على الأقل' : 'Type at least 2 characters',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
           ),
         ),
       );
@@ -71,7 +71,7 @@ class FoodSearchDelegate extends SearchDelegate<FoodItem?> {
             return ListTile(
               leading: CircleAvatar(
                 backgroundColor:
-                    Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
                 child: Text(
                   food.name.isNotEmpty ? food.name[0] : '?',
                   style: TextStyle(

@@ -62,12 +62,12 @@ class ConversationsScreen extends ConsumerWidget {
                 children: [
                   Icon(Icons.chat_bubble_outline,
                       size:  72,
-                      color: theme.colorScheme.primary.withOpacity(0.3)),
+                      color: theme.colorScheme.primary.withValues(alpha: 0.3)),
                   const SizedBox(height: AppSpacing.md),
                   Text(
                     isRtl ? 'لا محادثات حتى الآن' : 'No conversations yet',
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.5),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                     ),
                   ),
                 ],
@@ -90,7 +90,7 @@ class ConversationsScreen extends ConsumerWidget {
                   onTap: () => context.push('/conversations/chat/${conv.id}'),
                   leading: CircleAvatar(
                     backgroundColor:
-                        theme.colorScheme.primary.withOpacity(0.1),
+                        theme.colorScheme.primary.withValues(alpha: 0.1),
                     child: Icon(
                       Icons.person,
                       color: theme.colorScheme.primary,
@@ -114,7 +114,7 @@ class ConversationsScreen extends ConsumerWidget {
                       Text(
                         lastTime,
                         style: theme.textTheme.labelSmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.5),
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                         ),
                       ),
                       if (conv.unreadCount > 0)

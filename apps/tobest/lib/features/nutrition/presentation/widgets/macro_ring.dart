@@ -67,7 +67,7 @@ class MacroRing extends StatelessWidget {
                       Text(
                         isRtl ? 'كال / $goalCal' : 'kcal / $goalCal',
                         style: theme.textTheme.labelSmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.5),
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                         ),
                       ),
                     ],
@@ -143,7 +143,7 @@ class _MacroBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
         child: LinearProgressIndicator(
           value:           progress,
-          backgroundColor: color.withOpacity(0.15),
+          backgroundColor: color.withValues(alpha: 0.15),
           valueColor:      AlwaysStoppedAnimation(color),
           minHeight:       8,
         ),
@@ -182,7 +182,7 @@ class _RingPainter extends CustomPainter {
       2 * math.pi,
       false,
       Paint()
-        ..color       = color.withOpacity(0.12)
+        ..color       = color.withValues(alpha: 0.12)
         ..style       = PaintingStyle.stroke
         ..strokeWidth = strokeWidth
         ..strokeCap   = StrokeCap.round,

@@ -54,7 +54,7 @@ class MealCard extends StatelessWidget {
                 Text(
                   timeStr,
                   style: theme.textTheme.labelSmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.5),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                   ),
                 ),
               ]),
@@ -97,7 +97,7 @@ class MealCard extends StatelessWidget {
                   meal.items.map((i) =>
                       '${i.foodName} (${i.amount.toInt()}g)').join('، '),
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.6),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
                   maxLines:  2,
                   overflow:  TextOverflow.ellipsis,

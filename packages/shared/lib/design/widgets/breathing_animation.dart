@@ -126,9 +126,9 @@ class _BreathingAnimationState extends State<BreathingAnimation>
                   height: widget.size,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: color.withOpacity(0.15),
+                    color: color.withValues(alpha: 0.15),
                     border: Border.all(
-                      color: color.withOpacity(0.4),
+                      color: color.withValues(alpha: 0.4),
                       width: 2,
                     ),
                   ),
@@ -138,7 +138,7 @@ class _BreathingAnimationState extends State<BreathingAnimation>
                       height: widget.size * 0.5,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: color.withOpacity(0.6),
+                        color: color.withValues(alpha: 0.6),
                       ),
                     ),
                   ),
@@ -236,7 +236,7 @@ class _RestTimerWidgetState extends State<RestTimerWidget> {
         Text(
           widget.isRtl ? 'وقت الراحة' : 'Rest Time',
           style: theme.textTheme.bodyMedium?.copyWith(
-            color: theme.colorScheme.onSurface.withOpacity(0.6),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
           ),
         ),
 

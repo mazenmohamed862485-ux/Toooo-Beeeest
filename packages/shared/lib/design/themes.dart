@@ -113,12 +113,12 @@ ThemeData _buildTheme(ColorScheme colorScheme, Brightness brightness) {
     ),
 
     // ── Cards ───────────────────────────────────────────────
-    cardTheme: CardThemeData(
+    cardTheme: CardTheme(
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         side: BorderSide(
-          color: colorScheme.outlineVariant.withOpacity(0.5),
+          color: colorScheme.outlineVariant.withValues(alpha: 0.5),
           width: 1,
         ),
       ),
@@ -156,14 +156,14 @@ ThemeData _buildTheme(ColorScheme colorScheme, Brightness brightness) {
     // ── Input Fields ────────────────────────────────────────
     inputDecorationTheme: InputDecorationTheme(
       filled:            true,
-      fillColor:         colorScheme.surfaceContainerHighest.withOpacity(0.5),
+      fillColor:         colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         borderSide: BorderSide.none,
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-        borderSide: BorderSide(color: colorScheme.outline.withOpacity(0.3)),
+        borderSide: BorderSide(color: colorScheme.outline.withValues(alpha: 0.3)),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
@@ -182,7 +182,7 @@ ThemeData _buildTheme(ColorScheme colorScheme, Brightness brightness) {
     // ── Bottom Navigation ────────────────────────────────────
     navigationBarTheme: NavigationBarThemeData(
       elevation:    0,
-      indicatorColor: colorScheme.primary.withOpacity(0.12),
+      indicatorColor: colorScheme.primary.withValues(alpha: 0.12),
       backgroundColor: colorScheme.surface,
       labelTextStyle: WidgetStateProperty.all(
         baseTextTheme.labelSmall?.copyWith(fontWeight: FontWeight.w500),
@@ -191,7 +191,7 @@ ThemeData _buildTheme(ColorScheme colorScheme, Brightness brightness) {
 
     // ── Divider ─────────────────────────────────────────────
     dividerTheme: DividerThemeData(
-      color: colorScheme.outlineVariant.withOpacity(0.5),
+      color: colorScheme.outlineVariant.withValues(alpha: 0.5),
       space: 1,
       thickness: 1,
     ),

@@ -93,8 +93,8 @@ class ChatBubble extends StatelessWidget {
                         isRtl ? '🗑️ تم حذف هذه الرسالة' : '🗑️ This message was deleted',
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: isMine
-                              ? Colors.white.withOpacity(0.7)
-                              : theme.colorScheme.onSurface.withOpacity(0.5),
+                              ? Colors.white.withValues(alpha: 0.7)
+                              : theme.colorScheme.onSurface.withValues(alpha: 0.5),
                           fontStyle: FontStyle.italic,
                         ),
                       )
@@ -121,13 +121,13 @@ class ChatBubble extends StatelessWidget {
                       Text(
                         isRtl ? '(معدّل) ' : '(edited) ',
                         style: theme.textTheme.labelSmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.4),
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
                         ),
                       ),
                     Text(
                       timeStr,
                       style: theme.textTheme.labelSmall?.copyWith(
-                        color: theme.colorScheme.onSurface.withOpacity(0.4),
+                        color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
                       ),
                     ),
                     if (isMine) ...[
@@ -139,7 +139,7 @@ class ChatBubble extends StatelessWidget {
                         size:  12,
                         color: message.isRead
                             ? AppColors.info
-                            : theme.colorScheme.onSurface.withOpacity(0.3),
+                            : theme.colorScheme.onSurface.withValues(alpha: 0.3),
                       ),
                     ],
                   ],

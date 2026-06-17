@@ -45,7 +45,7 @@ class SetRow extends StatelessWidget {
           vertical:   AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color:        theme.colorScheme.surfaceContainerHighest.withOpacity(0.5),
+          color:        theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(AppSpacing.sm),
         ),
         child: Row(children: [
@@ -55,7 +55,7 @@ class SetRow extends StatelessWidget {
             height: 28,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: theme.colorScheme.primary.withOpacity(0.12),
+              color: theme.colorScheme.primary.withValues(alpha: 0.12),
             ),
             alignment: Alignment.center,
             child: Text(
@@ -96,7 +96,7 @@ class SetRow extends StatelessWidget {
               child: Text(
                 'RPE ${set.rpe}',
                 style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               ),
             ),

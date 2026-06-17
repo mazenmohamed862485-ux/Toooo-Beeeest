@@ -141,17 +141,17 @@ class _RequestStatusCard extends StatelessWidget {
     final status = request.status;
     final (bgColor, icon, label) = switch (status) {
       SubscriptionRequestStatus.pending  => (
-          AppColors.warning.withOpacity(0.1),
+          AppColors.warning.withValues(alpha: 0.1),
           Icons.hourglass_empty,
           isRtl ? 'قيد المراجعة' : 'Under Review',
         ),
       SubscriptionRequestStatus.approved => (
-          AppColors.success.withOpacity(0.1),
+          AppColors.success.withValues(alpha: 0.1),
           Icons.check_circle_outline,
           isRtl ? 'تمت الموافقة' : 'Approved',
         ),
       SubscriptionRequestStatus.rejected => (
-          theme.colorScheme.error.withOpacity(0.1),
+          theme.colorScheme.error.withValues(alpha: 0.1),
           Icons.cancel_outlined,
           isRtl ? 'مرفوض' : 'Rejected',
         ),
@@ -261,7 +261,7 @@ class _PlanCardState extends State<_PlanCard> {
                     ? '${plan.durationDays} يوم'
                     : '${plan.durationDays} days',
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               ),
             ],

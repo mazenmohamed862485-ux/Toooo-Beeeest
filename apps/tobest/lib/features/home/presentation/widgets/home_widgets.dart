@@ -103,7 +103,7 @@ class _MetricTile extends StatelessWidget {
       Container(
         padding:    const EdgeInsets.all(AppSpacing.sm),
         decoration: BoxDecoration(
-          color:        color.withOpacity(0.1),
+          color:        color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppSpacing.sm),
         ),
         child: Icon(icon, color: color, size: AppSpacing.iconMd),
@@ -120,7 +120,7 @@ class _MetricTile extends StatelessWidget {
       Text(
         label,
         style: theme.textTheme.bodySmall?.copyWith(
-          color: theme.colorScheme.onSurface.withOpacity(0.5),
+          color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
         ),
       ),
     ]);
@@ -190,7 +190,7 @@ class _QuickAction extends StatelessWidget {
           Container(
             padding:    const EdgeInsets.all(AppSpacing.md),
             decoration: BoxDecoration(
-              color:        color.withOpacity(0.12),
+              color:        color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
             ),
             child: Icon(icon, color: color, size: 28),
@@ -269,7 +269,7 @@ class TodayWorkoutCard extends StatelessWidget {
             Container(
               padding:    const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
-                color:        theme.colorScheme.primary.withOpacity(0.1),
+                color:        theme.colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
               ),
               child: Icon(
@@ -292,7 +292,7 @@ class TodayWorkoutCard extends StatelessWidget {
                   Text(
                     isRtl ? 'اضغط للبدء' : 'Tap to start',
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.5),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                     ),
                   ),
                 ],

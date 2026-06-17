@@ -175,11 +175,11 @@ class _StatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Card(
-      color: urgent ? color.withOpacity(0.08) : null,
+      color: urgent ? color.withValues(alpha: 0.08) : null,
       shape: urgent
           ? RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-              side:         BorderSide(color: color.withOpacity(0.4)),
+              side:         BorderSide(color: color.withValues(alpha: 0.4)),
             )
           : null,
       child: Padding(
@@ -199,7 +199,7 @@ class _StatCard extends StatelessWidget {
             Text(
               label,
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.6),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
               ),
             ),
           ],

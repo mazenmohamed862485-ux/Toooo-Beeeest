@@ -45,9 +45,7 @@ jobs:
       - name: Bootstrap Monorepo
         run: melos bootstrap
 
-      - name: Generate Code
-        run: melos run generate
-
+      # ── يجب إنشاء secrets.dart قبل توليد الكود ──────────
       - name: Create Secrets File
         env:
           GAS_BASE_URL: ${{ secrets.GAS_BASE_URL }}
@@ -63,6 +61,85 @@ jobs:
             printf "  static const String geminiApiKey = '%s';\n" "${GEMINI_API_KEY}"
             echo "}"
           } > packages/shared/lib/config/secrets.dart
+
+      # ── Phase 1: توليد Isar Models (تتطلب isar_generator منفرداً) ──
+      - name: Phase 1 - Generate Isar Models
+        env:
+          ISAR_PUBSPEC: |
+            name: shared
+            environment:
+              sdk: '>=3.3.0 <4.0.0'
+              flutter: '>=3.44.0'
+            dependencies:
+              flutter:
+                sdk: flutter
+              flutter_riverpod: ^2.5.1
+              riverpod_annotation: ^2.3.5
+              hooks_riverpod: ^2.5.1
+              flutter_hooks: ^0.20.5
+              isar: ^3.1.0
+              isar_flutter_libs: ^3.1.0
+              path_provider: ^2.1.3
+              dio: ^5.4.3
+              go_router: ^14.2.0
+              video_player: ^2.8.7
+              flutter_local_notifications: ^17.2.2
+              google_sign_in: ^6.2.1
+              google_generative_ai: ^0.4.6
+              google_fonts: ^6.2.1
+              pedometer: ^4.0.2
+              image_picker: ^1.1.2
+              flutter_secure_storage: ^9.2.2
+              connectivity_plus: ^6.0.3
+              cached_network_image: ^3.3.1
+              workmanager: ^0.9.0
+              intl: ^0.20.0
+              uuid: ^4.4.0
+              crypto: ^3.0.3
+              shared_preferences: ^2.2.3
+              permission_handler: ^11.3.1
+            dev_dependencies:
+              flutter_test:
+                sdk: flutter
+              build_runner: ^2.4.11
+              isar_generator: ^3.1.0
+            flutter:
+              assets:
+                - assets/images/
+                - assets/l10n/
+        run: |
+          cp packages/shared/pubspec.yaml packages/shared/pubspec.yaml.bak
+          printf '%s\n' "$ISAR_PUBSPEC" > packages/shared/pubspec.yaml
+          cd packages/shared && flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+          cd ../..
+          cp packages/shared/pubspec.yaml.bak packages/shared/pubspec.yaml
+
+      # ── Phase 2: Bootstrap + توليد Riverpod + استعادة Isar files ──
+      - name: Phase 2 - Bootstrap + Generate Riverpod Providers
+        run: |
+          # احتياطي من ملفات Isar .g.dart التي تم توليدها في Phase 1
+          mkdir -p /tmp/shared_isar_backup
+          find packages/shared/lib -name "*.g.dart" \
+            -exec cp --parents {} /tmp/shared_isar_backup/ \; 2>/dev/null || true
+          echo "Backed up $(find /tmp/shared_isar_backup -name '*.g.dart' | wc -l) Isar files"
+
+          melos bootstrap
+
+          # Step A: توليد Riverpod في shared أولاً (سيحذف Isar files — متوقع)
+          (cd packages/shared && dart run build_runner build --delete-conflicting-outputs)
+
+          # Step B: استعادة ملفات Isar .g.dart التي حُذفت في Step A
+          find /tmp/shared_isar_backup/packages/shared/lib -name "*.g.dart" 2>/dev/null \
+            | while read f; do
+                rel="${f#/tmp/shared_isar_backup/}"
+                mkdir -p "$(dirname "$rel")"
+                cp "$f" "$rel"
+              done
+          echo "Restored: $(find packages/shared/lib -name '*.g.dart' | wc -l) .g.dart files in shared"
+
+          # Step C: توليد Riverpod في تطبيق tobest
+          (cd apps/tobest && dart run build_runner build --delete-conflicting-outputs)
 
       - name: Decode Keystore
         run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > ${{ env.APP_DIR }}/android/app/tobest.jks

@@ -209,7 +209,7 @@ class _RequestCard extends StatelessWidget {
                       '${request.planId} • $dateStr',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color:
-                            theme.colorScheme.onSurface.withOpacity(0.5),
+                            theme.colorScheme.onSurface.withValues(alpha: 0.5),
                       ),
                     ),
                   ],
@@ -245,7 +245,7 @@ class _RequestCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(AppSpacing.sm),
                 decoration: BoxDecoration(
-                  color:        theme.colorScheme.error.withOpacity(0.08),
+                  color:        theme.colorScheme.error.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(AppSpacing.sm),
                 ),
                 child: Text(
@@ -478,9 +478,9 @@ class _StatusBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color:        color.withOpacity(0.12),
+        color:        color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-        border:       Border.all(color: color.withOpacity(0.3)),
+        border:       Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Text(
         label,

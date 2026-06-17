@@ -52,7 +52,7 @@ class GoogleCompletionScreen extends HookConsumerWidget {
                       ? 'نحتاج هذه المعلومات لتخصيص برنامجك'
                       : 'We need this info to personalize your program',
                   style:     theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.6),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
                   textAlign: TextAlign.center,
                 ),

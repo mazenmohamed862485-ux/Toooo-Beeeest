@@ -46,7 +46,7 @@ class StepsChart extends StatelessWidget {
               ? AppColors.primary
               : r.steps >= 5000
                   ? AppColors.accent3
-                  : AppColors.accent5.withOpacity(0.4);
+                  : AppColors.accent5.withValues(alpha: 0.4);
 
           return Expanded(
             child: Padding(
@@ -117,7 +117,7 @@ class BodyChart extends ConsumerWidget {
                       ? 'سجّل قياساتك لعرض الرسم البياني'
                       : 'Log measurements to see chart',
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.4),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
                   ),
                 ),
               ),
@@ -179,14 +179,14 @@ class PRList extends ConsumerWidget {
                 children: [
                   Icon(Icons.emoji_events,
                       size: 64,
-                      color: theme.colorScheme.primary.withOpacity(0.3)),
+                      color: theme.colorScheme.primary.withValues(alpha: 0.3)),
                   const SizedBox(height: AppSpacing.md),
                   Text(
                     isRtl
                         ? 'لا أرقام قياسية بعد\nابدأ بالتمرين!'
                         : 'No PRs yet\nStart working out!',
                     style:     theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.5),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -210,12 +210,12 @@ class PRList extends ConsumerWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: i == 0
-                        ? const Color(0xFFFFD700).withOpacity(0.15) // ذهبي
+                        ? const Color(0xFFFFD700).withValues(alpha: 0.15) // ذهبي
                         : i == 1
-                            ? const Color(0xFFC0C0C0).withOpacity(0.15) // فضي
+                            ? const Color(0xFFC0C0C0).withValues(alpha: 0.15) // فضي
                             : i == 2
-                                ? const Color(0xFFCD7F32).withOpacity(0.15) // برونزي
-                                : theme.colorScheme.primary.withOpacity(0.1),
+                                ? const Color(0xFFCD7F32).withValues(alpha: 0.15) // برونزي
+                                : theme.colorScheme.primary.withValues(alpha: 0.1),
                   ),
                   alignment: Alignment.center,
                   child: Text(

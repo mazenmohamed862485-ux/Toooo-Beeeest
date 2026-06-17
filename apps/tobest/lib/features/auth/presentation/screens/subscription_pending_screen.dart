@@ -52,7 +52,7 @@ class SubscriptionPendingScreen extends ConsumerWidget {
                     ? 'يتم مراجعة طلب اشتراكك من قبل فريقنا.\nسيتم إشعارك فور الموافقة.'
                     : 'Your subscription request is being reviewed by our team.\nYou will be notified once approved.',
                 style:     theme.textTheme.bodyMedium?.copyWith(
-                  color:  theme.colorScheme.onSurface.withOpacity(0.6),
+                  color:  theme.colorScheme.onSurface.withValues(alpha: 0.6),
                   height: 1.6,
                 ),
                 textAlign: TextAlign.center,

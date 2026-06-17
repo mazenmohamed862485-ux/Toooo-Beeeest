@@ -191,7 +191,7 @@ class RegisterScreen extends HookConsumerWidget {
               Text(
                 isRtl ? 'الجنس' : 'Gender',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -291,11 +291,11 @@ class _GenderCard extends StatelessWidget {
           border:       Border.all(
             color: selected
                 ? theme.colorScheme.primary
-                : theme.colorScheme.outline.withOpacity(0.3),
+                : theme.colorScheme.outline.withValues(alpha: 0.3),
             width: selected ? 2 : 1,
           ),
           color: selected
-              ? theme.colorScheme.primary.withOpacity(0.08)
+              ? theme.colorScheme.primary.withValues(alpha: 0.08)
               : null,
         ),
         child: Column(children: [

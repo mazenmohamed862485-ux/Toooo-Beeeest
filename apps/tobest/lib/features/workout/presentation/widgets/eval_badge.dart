@@ -64,11 +64,11 @@ class EvalBadge extends StatelessWidget {
       's2' => (AppColors.success, Colors.white),
       's3' => (AppColors.info, Colors.white),
       'rv' => (AppColors.accent2, Colors.white),
-      'gd' => (AppColors.primaryLight.withOpacity(0.2), AppColors.primary),
-      'st' => (AppColors.warning.withOpacity(0.15), AppColors.warning),
-      'ws' => (AppColors.warning.withOpacity(0.25), AppColors.warning),
-      'dn' => (AppColors.error.withOpacity(0.15), AppColors.error),
-      _    => (Colors.grey.withOpacity(0.15), Colors.grey),
+      'gd' => (AppColors.primaryLight.withValues(alpha: 0.2), AppColors.primary),
+      'st' => (AppColors.warning.withValues(alpha: 0.15), AppColors.warning),
+      'ws' => (AppColors.warning.withValues(alpha: 0.25), AppColors.warning),
+      'dn' => (AppColors.error.withValues(alpha: 0.15), AppColors.error),
+      _    => (Colors.grey.withValues(alpha: 0.15), Colors.grey),
     };
   }
 

@@ -236,7 +236,7 @@ class ChatScreen extends HookConsumerWidget {
                     child: Text(
                       isRtl ? 'ابدأ المحادثة...' : 'Start the conversation...',
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.onSurface.withOpacity(0.4),
+                        color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
                       ),
                     ),
                   );

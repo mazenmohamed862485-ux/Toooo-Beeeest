@@ -204,8 +204,8 @@ class _ExerciseCard extends HookConsumerWidget {
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         border: Border.all(
           color: isExpanded.value
-              ? theme.colorScheme.primary.withOpacity(0.4)
-              : theme.colorScheme.outline.withOpacity(0.2),
+              ? theme.colorScheme.primary.withValues(alpha: 0.4)
+              : theme.colorScheme.outline.withValues(alpha: 0.2),
           width: isExpanded.value ? 1.5 : 1,
         ),
         color: theme.colorScheme.surface,
@@ -246,7 +246,7 @@ class _ExerciseCard extends HookConsumerWidget {
                         '${exercise.muscle} • ${exercise.repRange ?? ''} reps',
                         style: theme.textTheme.bodySmall?.copyWith(
                           color:
-                              theme.colorScheme.onSurface.withOpacity(0.5),
+                              theme.colorScheme.onSurface.withValues(alpha: 0.5),
                         ),
                       ),
                     ],
@@ -340,8 +340,8 @@ class _ExerciseCard extends HookConsumerWidget {
                         ),
                         decoration: BoxDecoration(
                           color: suggestion.type == 'up'
-                              ? AppColors.success.withOpacity(0.1)
-                              : AppColors.warning.withOpacity(0.1),
+                              ? AppColors.success.withValues(alpha: 0.1)
+                              : AppColors.warning.withValues(alpha: 0.1),
                           borderRadius:
                               BorderRadius.circular(AppSpacing.radiusFull),
                         ),
@@ -494,9 +494,9 @@ class _InfoChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md, vertical: AppSpacing.xs),
       decoration: BoxDecoration(
-        color:        color.withOpacity(0.1),
+        color:        color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-        border:       Border.all(color: color.withOpacity(0.3)),
+        border:       Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Text(
         label,
@@ -526,7 +526,7 @@ class _EmptyWorkoutView extends StatelessWidget {
           children: [
             Icon(Icons.event_available,
                 size: 80,
-                color: theme.colorScheme.primary.withOpacity(0.4)),
+                color: theme.colorScheme.primary.withValues(alpha: 0.4)),
             const SizedBox(height: AppSpacing.xl),
             Text(
               isRtl ? 'لا تمارين اليوم 🎉' : 'Rest Day 🎉',
@@ -539,7 +539,7 @@ class _EmptyWorkoutView extends StatelessWidget {
                   ? 'استرح وكن مستعداً للغد!'
                   : 'Rest up and get ready for tomorrow!',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.6),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
               ),
               textAlign: TextAlign.center,
             ),

@@ -117,7 +117,7 @@ class AiCoachScreen extends HookConsumerWidget {
             height: 32,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: theme.colorScheme.primary.withOpacity(0.1),
+              color: theme.colorScheme.primary.withValues(alpha: 0.1),
             ),
             child: Icon(
               Icons.psychology,
@@ -143,7 +143,7 @@ class AiCoachScreen extends HookConsumerWidget {
                     Icon(
                       Icons.psychology,
                       size:  80,
-                      color: theme.colorScheme.primary.withOpacity(0.3),
+                      color: theme.colorScheme.primary.withValues(alpha: 0.3),
                     ),
                     const SizedBox(height: AppSpacing.xl),
                     Text(
@@ -151,7 +151,7 @@ class AiCoachScreen extends HookConsumerWidget {
                           ? 'مرحباً! أنا مدربك الرقمي 🤖\nاسألني أي شيء عن التمارين والتغذية'
                           : 'Hi! I\'m your AI coach 🤖\nAsk me anything about fitness & nutrition',
                       style:     theme.textTheme.bodyLarge?.copyWith(
-                        color: theme.colorScheme.onSurface.withOpacity(0.6),
+                        color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                         height: 1.6,
                       ),
                       textAlign: TextAlign.center,
@@ -373,7 +373,7 @@ class _DotState extends State<_Dot> with SingleTickerProviderStateMixin {
         height: 6,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
         ),
       ),
     );

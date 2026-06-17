@@ -19,10 +19,11 @@ scripts:
     run: melos exec -- flutter analyze
     description: تحليل الكود في كل الحزم
 
-  # توليد الكود (Isar + Riverpod)
+  # توليد الكود — يعمل في apps فقط (shared تحتاج two-phase generation)
+  # لتوليد shared استخدم CI/CD workflow أو الأوامر اليدوية الموثقة في README
   generate:
-    run: melos exec --depends-on="build_runner" -- dart run build_runner build --delete-conflicting-outputs
-    description: توليد الكود التلقائي
+    run: melos exec --depends-on="build_runner" --ignore="shared" -- dart run build_runner build --delete-conflicting-outputs
+    description: توليد الكود التلقائي (apps فقط — shared تحتاج two-phase generation)
 
   # تنظيف مؤقت البناء
   clean:

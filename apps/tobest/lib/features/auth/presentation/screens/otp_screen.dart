@@ -126,7 +126,7 @@ class OtpScreen extends HookConsumerWidget {
                     ? 'تم إرسال رمز مكوّن من 6 أرقام إلى\n$email'
                     : 'A 6-digit code was sent to\n$email',
                 style:     theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.6),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -150,7 +150,7 @@ class OtpScreen extends HookConsumerWidget {
                   hintText:    '000000',
                   hintStyle: theme.textTheme.headlineMedium?.copyWith(
                     letterSpacing: 8,
-                    color: theme.colorScheme.onSurface.withOpacity(0.3),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.3),
                   ),
                 ),
               ),
@@ -163,7 +163,7 @@ class OtpScreen extends HookConsumerWidget {
                     ? 'صالح لـ ${AppConfig.otpExpiryMinutes} دقائق'
                     : 'Valid for ${AppConfig.otpExpiryMinutes} minutes',
                 style:     theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
                 textAlign: TextAlign.center,
               ),

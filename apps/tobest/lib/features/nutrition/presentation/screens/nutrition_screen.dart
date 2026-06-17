@@ -168,7 +168,7 @@ class _TodayTab extends StatelessWidget {
                         color: Theme.of(context)
                             .colorScheme
                             .onSurface
-                            .withOpacity(0.5),
+                            .withValues(alpha: 0.5),
                       ),
                     ),
                   ),
@@ -243,7 +243,7 @@ class _TextParserTab extends HookWidget {
         children: [
           // ── تعليمات ─────────────────────────────────────
           Card(
-            color: theme.colorScheme.primaryContainer.withOpacity(0.3),
+            color: theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.md),
               child: Text(
@@ -374,7 +374,7 @@ class _ParseResultCard extends StatelessWidget {
               Text(
                 result.unmatched.join(', '),
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.error.withOpacity(0.8),
+                  color: theme.colorScheme.error.withValues(alpha: 0.8),
                 ),
               ),
             ],
@@ -483,7 +483,7 @@ class _MealSuggestionSheet extends HookConsumerWidget {
               width:      40,
               height:     4,
               decoration: BoxDecoration(
-                color: theme.colorScheme.onSurface.withOpacity(0.2),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
               ),
             ),

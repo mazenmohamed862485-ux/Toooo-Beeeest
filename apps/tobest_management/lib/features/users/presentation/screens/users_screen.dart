@@ -152,7 +152,7 @@ class UsersScreen extends HookConsumerWidget {
                             CircleAvatar(
                               backgroundColor:
                                   (user.isBanned ? AppColors.error : theme.colorScheme.primary)
-                                      .withOpacity(0.1),
+                                      .withValues(alpha: 0.1),
                               child: Text(
                                 user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
                                 style: TextStyle(
@@ -186,7 +186,7 @@ class UsersScreen extends HookConsumerWidget {
                             Text(
                               user.role,
                               style: theme.textTheme.labelSmall?.copyWith(
-                                color: theme.colorScheme.onSurface.withOpacity(0.4),
+                                color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
                               ),
                             ),
                           ],
@@ -222,7 +222,7 @@ class _StatusBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color:        color.withOpacity(0.15),
+        color:        color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
       ),
       child: Text(

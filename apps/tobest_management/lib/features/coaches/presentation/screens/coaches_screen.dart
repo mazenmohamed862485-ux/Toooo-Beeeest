@@ -64,13 +64,13 @@ class CoachesScreen extends ConsumerWidget {
                   Icon(
                     Icons.fitness_center,
                     size:  80,
-                    color: theme.colorScheme.primary.withOpacity(0.3),
+                    color: theme.colorScheme.primary.withValues(alpha: 0.3),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   Text(
                     isRtl ? 'لا كوتشات مسجلون' : 'No coaches registered',
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.5),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                     ),
                   ),
                 ],
@@ -89,7 +89,7 @@ class CoachesScreen extends ConsumerWidget {
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundColor:
-                        theme.colorScheme.primary.withOpacity(0.1),
+                        theme.colorScheme.primary.withValues(alpha: 0.1),
                     child: Text(
                       coach.name.isNotEmpty
                           ? coach.name[0].toUpperCase()

@@ -173,7 +173,7 @@ class _VideoCarouselState extends ConsumerState<VideoCarousel> {
                             : Theme.of(context)
                                 .colorScheme
                                 .onSurface
-                                .withOpacity(0.2),
+                                .withValues(alpha: 0.2),
                       ),
                     );
                   }).toList(),
@@ -241,8 +241,8 @@ class _VideoPage extends StatelessWidget {
                 allowScrubbing: true,
                 colors: VideoProgressColors(
                   playedColor:     theme.colorScheme.primary,
-                  backgroundColor: Colors.white.withOpacity(0.3),
-                  bufferedColor:   Colors.white.withOpacity(0.5),
+                  backgroundColor: Colors.white.withValues(alpha: 0.3),
+                  bufferedColor:   Colors.white.withValues(alpha: 0.5),
                 ),
               ),
             ),
@@ -261,7 +261,7 @@ class _VideoPage extends StatelessWidget {
                     height:     56,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.black.withOpacity(0.5),
+                      color: Colors.black.withValues(alpha: 0.5),
                     ),
                     child: Icon(
                       playState == VideoPlayState.ended
@@ -314,7 +314,7 @@ class _VideoPage extends StatelessWidget {
                   begin:  Alignment.topCenter,
                   end:    Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.5),
+                    Colors.black.withValues(alpha: 0.5),
                     Colors.transparent,
                   ],
                 ),
@@ -351,7 +351,7 @@ class _VideoPage extends StatelessWidget {
         Text(
           isRtl ? 'اضغط للتشغيل' : 'Tap to play',
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
           ),
         ),
       ],

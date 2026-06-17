@@ -44,7 +44,7 @@ class ChatInputBar extends HookWidget {
         color: theme.colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color:      Colors.black.withOpacity(0.05),
+            color:      Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
             offset:     const Offset(0, -2),
           ),
@@ -96,7 +96,7 @@ class ChatInputBar extends HookWidget {
               : Icon(
                   Icons.mic_none,
                   key:   const ValueKey('mic'),
-                  color: theme.colorScheme.onSurface.withOpacity(0.4),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
                 ),
         ),
       ]),

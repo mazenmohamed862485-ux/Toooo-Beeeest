@@ -45,7 +45,7 @@ class SubscriptionExpiredScreen extends ConsumerWidget {
                     ? 'انتهت صلاحية اشتراكك.\nجدّده الآن للاستمرار في برنامجك.'
                     : 'Your subscription has expired.\nRenew now to continue your program.',
                 style:     theme.textTheme.bodyMedium?.copyWith(
-                  color:  theme.colorScheme.onSurface.withOpacity(0.6),
+                  color:  theme.colorScheme.onSurface.withValues(alpha: 0.6),
                   height: 1.6,
                 ),
                 textAlign: TextAlign.center,

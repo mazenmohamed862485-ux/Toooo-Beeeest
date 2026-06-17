@@ -70,7 +70,7 @@ class _GoogleSignInButtonState extends ConsumerState<GoogleSignInButton> {
                   height: 24,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.red.withOpacity(0.1),
+                    color: Colors.red.withValues(alpha: 0.1),
                   ),
                   child: const Center(
                     child: Text(

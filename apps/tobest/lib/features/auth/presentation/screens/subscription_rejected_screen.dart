@@ -45,7 +45,7 @@ class SubscriptionRejectedScreen extends ConsumerWidget {
                     ? 'للأسف تم رفض طلب اشتراكك.\nيمكنك التقديم مجدداً أو التواصل مع الدعم.'
                     : 'Unfortunately, your subscription request was rejected.\nYou can reapply or contact support.',
                 style:     theme.textTheme.bodyMedium?.copyWith(
-                  color:  theme.colorScheme.onSurface.withOpacity(0.6),
+                  color:  theme.colorScheme.onSurface.withValues(alpha: 0.6),
                   height: 1.6,
                 ),
                 textAlign: TextAlign.center,
