@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:shared/domain/entities/nutrition_entity.dart';
 import 'package:shared/infrastructure/isar_service.dart';
-import 'package:shared/utils/evaluator.dart';
 
 /// مفوّض البحث في قاعدة الأطعمة
 class FoodSearchDelegate extends SearchDelegate<FoodItem?> {
