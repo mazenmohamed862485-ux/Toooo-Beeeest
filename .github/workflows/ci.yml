@@ -98,23 +98,30 @@ jobs:
 
       - name: Phase 2 - Bootstrap + Generate Riverpod Providers
         run: |
-          # Back up Isar-generated .g.dart files before build_runner --delete-conflicting-outputs removes them
+          # Save Isar .g.dart files generated in Phase 1 so we can restore them later
           mkdir -p /tmp/shared_isar_backup
-          find packages/shared/lib -name "*.g.dart" -exec cp --parents {} /tmp/shared_isar_backup/ \; 2>/dev/null || true
-          echo "Backed up $(find /tmp/shared_isar_backup -name '*.g.dart' | wc -l) Isar model files"
+          find packages/shared/lib -name "*.g.dart" \
+            -exec cp --parents {} /tmp/shared_isar_backup/ \; 2>/dev/null || true
+          echo "Backed up $(find /tmp/shared_isar_backup -name '*.g.dart' | wc -l) Isar files"
 
           melos bootstrap
-          melos run generate
 
-          # Restore Isar .g.dart files deleted by --delete-conflicting-outputs in Phase 2
-          find /tmp/shared_isar_backup/packages/shared/lib -name "*.g.dart" 2>/dev/null | while read backup; do
-            rel="${backup#/tmp/shared_isar_backup/}"
-            if [ ! -f "$rel" ]; then
-              mkdir -p "$(dirname "$rel")"
-              cp "$backup" "$rel"
-              echo "Restored: $rel"
-            fi
-          done
+          # Step A: Run Riverpod generation in shared FIRST (it will delete Isar files — expected)
+          (cd packages/shared && dart run build_runner build --delete-conflicting-outputs)
+
+          # Step B: Restore Isar model .g.dart files deleted in Step A
+          find /tmp/shared_isar_backup/packages/shared/lib -name "*.g.dart" 2>/dev/null \
+            | while read f; do
+                rel="${f#/tmp/shared_isar_backup/}"
+                mkdir -p "$(dirname "$rel")"
+                cp "$f" "$rel"
+              done
+          echo "Restored: $(find packages/shared/lib -name '*.g.dart' | wc -l) .g.dart files in shared"
+
+          # Step C: Run Riverpod generation in app packages
+          # (shared now has both Riverpod + Isar files, so Dart analyzer resolves all types)
+          (cd apps/tobest && dart run build_runner build --delete-conflicting-outputs)
+          (cd apps/tobest_management && dart run build_runner build --delete-conflicting-outputs)
 
       - name: Analyze All Packages
         run: melos run analyze
@@ -207,23 +214,30 @@ jobs:
 
       - name: Phase 2 - Bootstrap + Generate Riverpod Providers
         run: |
-          # Back up Isar-generated .g.dart files before build_runner --delete-conflicting-outputs removes them
+          # Save Isar .g.dart files generated in Phase 1 so we can restore them later
           mkdir -p /tmp/shared_isar_backup
-          find packages/shared/lib -name "*.g.dart" -exec cp --parents {} /tmp/shared_isar_backup/ \; 2>/dev/null || true
-          echo "Backed up $(find /tmp/shared_isar_backup -name '*.g.dart' | wc -l) Isar model files"
+          find packages/shared/lib -name "*.g.dart" \
+            -exec cp --parents {} /tmp/shared_isar_backup/ \; 2>/dev/null || true
+          echo "Backed up $(find /tmp/shared_isar_backup -name '*.g.dart' | wc -l) Isar files"
 
           melos bootstrap
-          melos run generate
 
-          # Restore Isar .g.dart files deleted by --delete-conflicting-outputs in Phase 2
-          find /tmp/shared_isar_backup/packages/shared/lib -name "*.g.dart" 2>/dev/null | while read backup; do
-            rel="${backup#/tmp/shared_isar_backup/}"
-            if [ ! -f "$rel" ]; then
-              mkdir -p "$(dirname "$rel")"
-              cp "$backup" "$rel"
-              echo "Restored: $rel"
-            fi
-          done
+          # Step A: Run Riverpod generation in shared FIRST (it will delete Isar files — expected)
+          (cd packages/shared && dart run build_runner build --delete-conflicting-outputs)
+
+          # Step B: Restore Isar model .g.dart files deleted in Step A
+          find /tmp/shared_isar_backup/packages/shared/lib -name "*.g.dart" 2>/dev/null \
+            | while read f; do
+                rel="${f#/tmp/shared_isar_backup/}"
+                mkdir -p "$(dirname "$rel")"
+                cp "$f" "$rel"
+              done
+          echo "Restored: $(find packages/shared/lib -name '*.g.dart' | wc -l) .g.dart files in shared"
+
+          # Step C: Run Riverpod generation in app packages
+          # (shared now has both Riverpod + Isar files, so Dart analyzer resolves all types)
+          (cd apps/tobest && dart run build_runner build --delete-conflicting-outputs)
+          (cd apps/tobest_management && dart run build_runner build --delete-conflicting-outputs)
 
       - name: Run Tests
         run: melos run test
