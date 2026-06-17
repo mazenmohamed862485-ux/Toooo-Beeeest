@@ -14,7 +14,7 @@ on:
         options: [production, staging]
 
 env:
-  FLUTTER_VERSION: '3.24.5'
+  FLUTTER_VERSION: '3.44.2'
   APP_DIR: apps/tobest_management
 
 jobs:
