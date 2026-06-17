@@ -45,7 +45,6 @@ jobs:
       - name: Bootstrap Monorepo
         run: melos bootstrap
 
-      # ── يجب إنشاء secrets.dart قبل توليد الكود ──────────
       - name: Create Secrets File
         env:
           GAS_BASE_URL: ${{ secrets.GAS_BASE_URL }}
@@ -62,7 +61,6 @@ jobs:
             echo "}"
           } > packages/shared/lib/config/secrets.dart
 
-      # ── Phase 1: توليد Isar Models (تتطلب isar_generator منفرداً) ──
       - name: Phase 1 - Generate Isar Models
         env:
           ISAR_PUBSPEC: |
@@ -115,10 +113,8 @@ jobs:
           cd ../..
           cp packages/shared/pubspec.yaml.bak packages/shared/pubspec.yaml
 
-      # ── Phase 2: Bootstrap + توليد Riverpod + استعادة Isar files ──
       - name: Phase 2 - Bootstrap + Generate Riverpod Providers
         run: |
-          # احتياطي من ملفات Isar .g.dart التي تم توليدها في Phase 1
           mkdir -p /tmp/shared_isar_backup
           find packages/shared/lib -name "*.g.dart" \
             -exec cp --parents {} /tmp/shared_isar_backup/ \; 2>/dev/null || true
@@ -126,10 +122,8 @@ jobs:
 
           melos bootstrap
 
-          # Step A: توليد Riverpod في shared أولاً (سيحذف Isar files — متوقع)
           (cd packages/shared && dart run build_runner build --delete-conflicting-outputs)
 
-          # Step B: استعادة ملفات Isar .g.dart التي حُذفت في Step A
           find /tmp/shared_isar_backup/packages/shared/lib -name "*.g.dart" 2>/dev/null \
             | while read f; do
                 rel="${f#/tmp/shared_isar_backup/}"
@@ -138,8 +132,22 @@ jobs:
               done
           echo "Restored: $(find packages/shared/lib -name '*.g.dart' | wc -l) .g.dart files in shared"
 
-          # Step C: توليد Riverpod في تطبيق tobest
           (cd apps/tobest && dart run build_runner build --delete-conflicting-outputs)
+
+      - name: Fix isar_flutter_libs Namespace (AGP 8.x compat)
+        run: |
+          ISAR_BUILD_GRADLE="$HOME/.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/android/build.gradle"
+          if [ -f "$ISAR_BUILD_GRADLE" ]; then
+            if ! grep -q "namespace" "$ISAR_BUILD_GRADLE"; then
+              sed -i "s/android {/android {\n    namespace 'dev.isar.isar_flutter_libs'/" "$ISAR_BUILD_GRADLE"
+              echo "Patched isar_flutter_libs namespace"
+            else
+              echo "namespace already present"
+            fi
+          else
+            echo "isar_flutter_libs build.gradle not found at expected path"
+            find ~/.pub-cache -name "build.gradle" -path "*isar_flutter_libs*" 2>/dev/null | head -5
+          fi
 
       - name: Decode Keystore
         run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > ${{ env.APP_DIR }}/android/app/tobest.jks
