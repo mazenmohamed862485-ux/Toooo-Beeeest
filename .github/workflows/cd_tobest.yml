@@ -134,28 +134,67 @@ jobs:
 
           (cd apps/tobest && dart run build_runner build --delete-conflicting-outputs)
 
-      - name: Fix isar_flutter_libs build.gradle (AGP 8.x + compileSdk compat)
+      - name: Fix isar_flutter_libs build.gradle (namespace + compileSdk 35)
         run: |
           ISAR_BUILD_GRADLE="$HOME/.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/android/build.gradle"
           if [ -f "$ISAR_BUILD_GRADLE" ]; then
-            echo "--- isar_flutter_libs/android/build.gradle (before patch) ---"
-            cat "$ISAR_BUILD_GRADLE"
-            # 1. Add namespace if missing
             if ! grep -q "namespace" "$ISAR_BUILD_GRADLE"; then
               sed -i "s/android {/android {\n    namespace 'dev.isar.isar_flutter_libs'/" "$ISAR_BUILD_GRADLE"
             fi
-            # 2. Upgrade compileSdkVersion to 35 to resolve lStar attribute
             sed -i 's/compileSdkVersion [0-9]*/compileSdkVersion 35/' "$ISAR_BUILD_GRADLE"
             sed -i 's/compileSdk [0-9]*/compileSdk 35/' "$ISAR_BUILD_GRADLE"
-            echo "--- isar_flutter_libs/android/build.gradle (after patch) ---"
-            cat "$ISAR_BUILD_GRADLE"
-          else
-            echo "isar_flutter_libs build.gradle not found - searching..."
-            find ~/.pub-cache -name "build.gradle" -path "*isar_flutter_libs*" 2>/dev/null | head -5
+            echo "Patched isar_flutter_libs build.gradle"
           fi
 
       - name: Decode Keystore
         run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > ${{ env.APP_DIR }}/android/app/tobest.jks
+
+      - name: Convert Keystore to Java-compatible PKCS12
+        env:
+          KEYSTORE_PASS: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+        run: |
+          JKS="${{ env.APP_DIR }}/android/app/tobest.jks"
+          echo "=== Keystore diagnostic ==="
+          ls -la "$JKS"
+          file "$JKS"
+
+          # Try openssl export (handles modern AES-256 PKCS12 and legacy formats)
+          openssl pkcs12 -noenc \
+            -in "$JKS" \
+            -passin "pass:${KEYSTORE_PASS}" \
+            -out /tmp/ks_plain.pem 2>&1 && EXPORT_OK=1 || EXPORT_OK=0
+
+          if [ "$EXPORT_OK" = "1" ] && [ -s /tmp/ks_plain.pem ]; then
+            echo "openssl export succeeded. Re-exporting with legacy algorithms..."
+            openssl pkcs12 -export -legacy \
+              -in /tmp/ks_plain.pem \
+              -out /tmp/tobest_legacy.jks \
+              -passout "pass:${KEYSTORE_PASS}" \
+              -name "${KEY_ALIAS}" 2>&1 && REIMPORT_OK=1 || REIMPORT_OK=0
+
+            if [ "$REIMPORT_OK" = "1" ] && [ -s /tmp/tobest_legacy.jks ]; then
+              mv /tmp/tobest_legacy.jks "$JKS"
+              echo "Keystore migrated to legacy PKCS12 (DES3/SHA1) - compatible with Java"
+            else
+              echo "Legacy re-export failed; trying without -legacy flag..."
+              openssl pkcs12 -export \
+                -in /tmp/ks_plain.pem \
+                -out /tmp/tobest_compat.jks \
+                -passout "pass:${KEYSTORE_PASS}" \
+                -name "${KEY_ALIAS}" 2>&1 && COMPAT_OK=1 || COMPAT_OK=0
+              if [ "$COMPAT_OK" = "1" ] && [ -s /tmp/tobest_compat.jks ]; then
+                mv /tmp/tobest_compat.jks "$JKS"
+                echo "Keystore re-exported (modern PKCS12)"
+              fi
+            fi
+            rm -f /tmp/ks_plain.pem
+          else
+            echo "openssl export failed. Keystore may be pure JKS format."
+          fi
+
+          echo "=== Verify with keytool ==="
+          keytool -list -keystore "$JKS" -storepass "${KEYSTORE_PASS}" 2>&1 | head -15 || true
 
       - name: Create key.properties
         run: |
