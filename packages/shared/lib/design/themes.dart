@@ -113,7 +113,7 @@ ThemeData _buildTheme(ColorScheme colorScheme, Brightness brightness) {
     ),
 
     // ── Cards ───────────────────────────────────────────────
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),

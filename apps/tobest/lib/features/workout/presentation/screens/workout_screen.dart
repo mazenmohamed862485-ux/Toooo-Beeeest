@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:shared/design/widgets/breathing_animation.dart';
 import 'package:shared/domain/entities/workout_entity.dart';
-import 'package:shared/utils/evaluator.dart';
 import 'package:tobest/features/workout/presentation/providers/workout_provider.dart';
 import 'package:tobest/features/workout/presentation/widgets/eval_badge.dart';
 import 'package:tobest/features/workout/presentation/widgets/set_row.dart';
@@ -28,7 +27,6 @@ class WorkoutScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final exercisesAsync = ref.watch(todayExercisesProvider);
     final session        = ref.watch(activeWorkoutSessionProvider);
-    final theme          = Theme.of(context);
     final isRtl          = Directionality.of(context) == TextDirection.rtl;
 
     return Scaffold(

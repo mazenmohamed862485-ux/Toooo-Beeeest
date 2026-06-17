@@ -6,7 +6,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared/config/app_config.dart';
 import 'package:shared/infrastructure/background_service.dart';
 import 'package:tobest/app.dart';
 

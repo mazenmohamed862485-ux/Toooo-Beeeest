@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared/design/themes.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:shared/infrastructure/gas_client.dart';
 import 'package:tobest/app.dart';
@@ -23,7 +22,6 @@ class SettingsScreen extends ConsumerWidget {
     final locale     = ref.watch(userLocaleProvider);
     final theme      = Theme.of(context);
     final isRtl      = Directionality.of(context) == TextDirection.rtl;
-    final gasClient  = ref.watch(gasClientProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -494,7 +492,7 @@ class _ProgramChangeSheetState extends State<_ProgramChangeSheet> {
           const SizedBox(height: AppSpacing.base),
 
           DropdownButtonFormField<String>(
-            value:       _selectedProgram,
+            initialValue: _selectedProgram,
             hint:        Text(widget.isRtl ? 'اختر البرنامج' : 'Select Program'),
             items:       _programs.map((p) => DropdownMenuItem(
               value: p,

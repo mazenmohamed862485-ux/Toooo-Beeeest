@@ -123,7 +123,6 @@ class FoodSearchDelegate extends SearchDelegate<FoodItem?> {
 
   Future<void> _showAmountDialog(BuildContext context, FoodItem food) async {
     final ctrl    = TextEditingController(text: food.amount.toInt().toString());
-    final theme   = Theme.of(context);
 
     await showDialog<void>(
       context: context,
@@ -149,8 +148,6 @@ class FoodSearchDelegate extends SearchDelegate<FoodItem?> {
           ),
           FilledButton(
             onPressed: () {
-              final amount = double.tryParse(ctrl.text) ?? food.amount;
-              final adjusted = Evaluator.adjustByAmount(food, amount);
               Navigator.of(ctx).pop();
               // يُرسَل للـ Provider
             },

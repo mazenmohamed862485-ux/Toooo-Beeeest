@@ -7,7 +7,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared/config/app_config.dart';
 import 'package:shared/design/themes.dart';
-import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
 import 'package:tobest/router.dart';
 
 /// جذر تطبيق TO Best

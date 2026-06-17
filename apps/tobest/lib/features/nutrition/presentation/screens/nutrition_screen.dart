@@ -3,16 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:shared/domain/entities/nutrition_entity.dart';
-import 'package:shared/infrastructure/gas_client.dart';
 import 'package:isar/isar.dart';
 import 'package:shared/data/models/food_model.dart';
-import 'package:shared/data/models/meal_model.dart';
 import 'package:shared/infrastructure/isar_service.dart';
 import 'package:shared/utils/evaluator.dart';
-import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
 import 'package:tobest/features/nutrition/presentation/providers/nutrition_provider.dart';
 import 'package:tobest/features/nutrition/presentation/widgets/macro_ring.dart';
 import 'package:tobest/features/nutrition/presentation/widgets/meal_card.dart';
@@ -35,7 +31,6 @@ class NutritionScreen extends HookConsumerWidget {
     final mealsAsync  = ref.watch(todayMealsProvider);
     final macroSumary = ref.watch(todayMacroSummaryProvider);
     final goal        = ref.watch(dailyMacroGoalProvider);
-    final theme       = Theme.of(context);
     final isRtl       = Directionality.of(context) == TextDirection.rtl;
     final tabController = useTabController(initialLength: 2);
 

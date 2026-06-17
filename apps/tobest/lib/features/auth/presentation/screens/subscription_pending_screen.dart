@@ -62,9 +62,9 @@ class SubscriptionPendingScreen extends ConsumerWidget {
 
               // ── زر إعادة التحقق ───────────────────────────
               OutlinedButton.icon(
-                onPressed: () async {
+                onPressed: () {
                   // إعادة جلب حالة المستخدم
-                  await ref.refresh(authStateProvider.future);
+                  ref.invalidate(authStateProvider);
                 },
                 icon:  const Icon(Icons.refresh),
                 label: Text(isRtl ? 'إعادة التحقق' : 'Refresh Status'),

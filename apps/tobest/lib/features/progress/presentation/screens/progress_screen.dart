@@ -14,7 +14,6 @@ class ProgressScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
     final isRtl = Directionality.of(context) == TextDirection.rtl;
 
     return DefaultTabController(
