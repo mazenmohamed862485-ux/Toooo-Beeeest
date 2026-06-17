@@ -5,6 +5,7 @@ import 'dart:developer' as developer;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared/config/app_config.dart';
 import 'package:shared/domain/entities/user_entity.dart';
 import 'package:shared/infrastructure/background_service.dart';
 import 'package:shared/infrastructure/gas_client.dart';
@@ -209,6 +210,3 @@ class AuthState extends _$AuthState {
     );
   }
 }
-
-import 'package:shared/config/app_config.dart';
-import 'package:shared/domain/entities/user_entity.dart';

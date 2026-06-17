@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/config/app_config.dart';
+import 'package:shared/domain/entities/user_entity.dart';
 import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
 import 'package:tobest/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:tobest/features/auth/presentation/screens/google_completion_screen.dart';
@@ -220,6 +221,3 @@ GoRouter router(Ref ref) {
 
 /// Observer لإضافة Slide Animation حسب اتجاه اللغة
 class _SlideTransitionObserver extends NavigatorObserver {}
-
-// Import ضروري لـ SubscriptionStatus
-import 'package:shared/domain/entities/user_entity.dart';

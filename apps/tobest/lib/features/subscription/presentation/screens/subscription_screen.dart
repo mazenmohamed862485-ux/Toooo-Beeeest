@@ -1,5 +1,6 @@
 // apps/tobest/lib/features/subscription/presentation/screens/subscription_screen.dart
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -403,7 +404,6 @@ class _PlanCardState extends State<_PlanCard> {
   }
 
   Future<String> _imageToBase64(File file) async {
-    import 'dart:convert';
     final bytes = await file.readAsBytes();
     return base64Encode(bytes);
   }
