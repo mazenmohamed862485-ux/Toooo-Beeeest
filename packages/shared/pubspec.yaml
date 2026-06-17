@@ -74,11 +74,11 @@ dev_dependencies:
     sdk: flutter
 
   # ── Code Generation ────────────────────────────────
+  # Note: riverpod_lint and custom_lint removed — incompatible with
+  #       isar_generator 3.x (requires analyzer <6.0.0 vs lint >=6.5.0)
   build_runner: ^2.4.11
   isar_generator: ^3.1.0
   riverpod_generator: ^2.4.3
-  custom_lint: ^0.6.4
-  riverpod_lint: ^2.3.13
 
 flutter:
   assets:
