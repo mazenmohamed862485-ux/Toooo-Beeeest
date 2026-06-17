@@ -1,9 +1,4 @@
-# .github/workflows/ci.yml
-#
-# CI — يعمل على كل Pull Request وكل push لـ main/develop
-# يفحص الكود ويشغل الاختبارات بدون بناء APK
-
-name: CI — Analyze & Test
+name: CI - Analyze and Test
 
 on:
   push:
@@ -16,12 +11,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # ── فحص وتحليل الكود ──────────────────────────────────────
   analyze:
     name: Dart Analyze
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,8 +23,8 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.5'
-          channel:         stable
-          cache:           true
+          channel: stable
+          cache: true
 
       - name: Install Melos
         run: dart pub global activate melos 6.3.0
@@ -39,31 +32,29 @@ jobs:
       - name: Bootstrap Packages
         run: melos bootstrap
 
-      - name: Create Secrets File (placeholder for analyze)
+      - name: Create Secrets Placeholder
         run: |
-          cat > packages/shared/lib/config/secrets.dart << 'SECRETS_EOF'
-// CI placeholder — real values injected in CD
-class AppSecrets {
-  AppSecrets._();
-  static const String gasBaseUrl   = 'https://placeholder.example.com';
-  static const String gasSecretKey = 'placeholder';
-  static const String geminiApiKey = 'placeholder';
-}
-SECRETS_EOF
+          {
+            echo "// CI placeholder - real values injected in CD"
+            echo "class AppSecrets {"
+            echo "  AppSecrets._();"
+            echo "  static const String gasBaseUrl   = 'https://placeholder.example.com';"
+            echo "  static const String gasSecretKey = 'placeholder';"
+            echo "  static const String geminiApiKey = 'placeholder';"
+            echo "}"
+          } > packages/shared/lib/config/secrets.dart
 
-      - name: Generate Code (build_runner)
+      - name: Generate Code
         run: melos run generate
 
       - name: Analyze All Packages
         run: melos run analyze
 
-  # ── تشغيل الاختبارات ──────────────────────────────────────
   test:
     name: Unit Tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: analyze
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -72,8 +63,8 @@ SECRETS_EOF
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.5'
-          channel:         stable
-          cache:           true
+          channel: stable
+          cache: true
 
       - name: Install Melos
         run: dart pub global activate melos 6.3.0
@@ -81,17 +72,17 @@ SECRETS_EOF
       - name: Bootstrap
         run: melos bootstrap
 
-      - name: Create Secrets File (placeholder for tests)
+      - name: Create Secrets Placeholder
         run: |
-          cat > packages/shared/lib/config/secrets.dart << 'SECRETS_EOF'
-// CI placeholder — real values injected in CD
-class AppSecrets {
-  AppSecrets._();
-  static const String gasBaseUrl   = 'https://placeholder.example.com';
-  static const String gasSecretKey = 'placeholder';
-  static const String geminiApiKey = 'placeholder';
-}
-SECRETS_EOF
+          {
+            echo "// CI placeholder - real values injected in CD"
+            echo "class AppSecrets {"
+            echo "  AppSecrets._();"
+            echo "  static const String gasBaseUrl   = 'https://placeholder.example.com';"
+            echo "  static const String gasSecretKey = 'placeholder';"
+            echo "  static const String geminiApiKey = 'placeholder';"
+            echo "}"
+          } > packages/shared/lib/config/secrets.dart
 
       - name: Generate Code
         run: melos run generate
