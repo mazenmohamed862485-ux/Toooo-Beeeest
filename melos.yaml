@@ -9,10 +9,13 @@ command:
     usePubspecOverrides: true
 
 scripts:
-  # تشغيل جميع الاختبارات
+  # تشغيل جميع الاختبارات — تعمل فقط في الحزم التي تحتوي مجلد test/
   test:
-    run: melos exec -- flutter test
+    exec: flutter test
     description: تشغيل الاختبارات في كل الحزم
+    packageFilters:
+      dirExists:
+        - test
 
   # فحص الكود
   analyze:
