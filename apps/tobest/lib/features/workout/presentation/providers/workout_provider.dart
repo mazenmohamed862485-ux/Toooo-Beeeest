@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/domain/entities/workout_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
+import 'package:isar/isar.dart';
 import 'package:shared/data/models/workout_model.dart';
 import 'package:shared/infrastructure/isar_service.dart';
 import 'package:shared/utils/evaluator.dart';
@@ -259,12 +260,6 @@ class ActiveSessionState {
       );
 }
 
-class PerformancePoint {
-  const PerformancePoint({required this.weight, required this.reps, this.date});
-  final double weight;
-  final int reps;
-  final DateTime? date;
-}
 
 String _todaySessionType() {
   // يُحدَّد من برنامج المستخدم في GAS

@@ -7,6 +7,7 @@ import 'package:pedometer/pedometer.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/domain/entities/health_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
+import 'package:isar/isar.dart';
 import 'package:shared/data/models/health_model.dart';
 import 'package:shared/infrastructure/isar_service.dart';
 import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';

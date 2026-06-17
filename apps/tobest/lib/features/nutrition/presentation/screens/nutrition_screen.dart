@@ -7,6 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:shared/domain/entities/nutrition_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
+import 'package:isar/isar.dart';
 import 'package:shared/data/models/food_model.dart';
 import 'package:shared/data/models/meal_model.dart';
 import 'package:shared/infrastructure/isar_service.dart';
