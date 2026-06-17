@@ -1,0 +1,35 @@
+name: tobest_monorepo
+
+packages:
+  - apps/**
+  - packages/**
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  # تشغيل جميع الاختبارات
+  test:
+    run: melos exec -- flutter test
+    description: تشغيل الاختبارات في كل الحزم
+
+  # فحص الكود
+  analyze:
+    run: melos exec -- flutter analyze
+    description: تحليل الكود في كل الحزم
+
+  # توليد الكود (Isar + Riverpod)
+  generate:
+    run: melos exec --depends-on="build_runner" -- dart run build_runner build --delete-conflicting-outputs
+    description: توليد الكود التلقائي
+
+  # تنظيف مؤقت البناء
+  clean:
+    run: melos exec -- flutter clean
+    description: تنظيف مجلدات البناء
+
+  # تحديث الـ dependencies
+  upgrade:
+    run: melos exec -- flutter pub upgrade
+    description: تحديث جميع الـ packages
