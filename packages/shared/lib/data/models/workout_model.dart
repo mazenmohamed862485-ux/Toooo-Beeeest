@@ -35,6 +35,8 @@ class WorkoutLogModel {
   late List<int?>   setRpe;
   late List<int?>   setRir;
 
+  /// Computed getter — @ignore so Isar skips this property
+  @ignore
   List<SetRecord> get sets {
     final length = setWeights.length;
     return List.generate(length, (i) => SetRecord(
